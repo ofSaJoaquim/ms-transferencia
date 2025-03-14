@@ -1,9 +1,12 @@
 package br.com.branetlogistica.ms_transferencia.modulos.requisicao.mapper;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.branetlogistica.core.util.Util;
 import br.com.branetlogistica.ms_transferencia.modulos.mercadoria.converter.MercadoriaConverter;
 import br.com.branetlogistica.ms_transferencia.modulos.pessoajuridica.converter.PessoaJuridicaConverter;
 import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.IRequisicaoTransferenciaItemDTO;
@@ -29,6 +32,17 @@ public class RequisicaoTransferenciaItemMapper {
 		
 	}
 	
+	public List<RequisicaoTransferenciaItemDTO> toDTO(List<RequisicaoTransferenciaItem> entities){
+		List<RequisicaoTransferenciaItemDTO> dtos = new ArrayList<RequisicaoTransferenciaItemDTO>();
+		if(Util.isEmpty(entities))
+			return dtos;
+				
+		entities.forEach(x -> dtos.add(this.toDTO(x)));
+		
+		return dtos;
+		
+	}
+		
 	private IRequisicaoTransferenciaItemDTO toDTO(RequisicaoTransferenciaItem entity, IRequisicaoTransferenciaItemDTO dto ) {
 		
 		dto.setId(entity.getId());
@@ -50,7 +64,6 @@ public class RequisicaoTransferenciaItemMapper {
 			return null;
 		
 		RequisicaoTransferenciaItemResponse response = (RequisicaoTransferenciaItemResponse)this.toDTO(entity, new RequisicaoTransferenciaItemResponse());
-		response.setRequisicaoTransferencia(this.requisicaoTransferenciaMapper.toDTO(entity.getRequisicaoTransferencia()));
 		response.setMercadoria(mercadoriaConverter.toResponse(entity.getMercadoria()));
 		response.setFabricante(pessoaJuridicaConverter.toResponse(entity.getFabricante()));
 		
@@ -60,5 +73,20 @@ public class RequisicaoTransferenciaItemMapper {
 		return response;
 		
 	}
+	
+	public List<RequisicaoTransferenciaItemResponse> toResponse(List<RequisicaoTransferenciaItem> entities) {
+		List<RequisicaoTransferenciaItemResponse> dtos = new ArrayList<RequisicaoTransferenciaItemResponse>();
+		if(Util.isEmpty(entities))
+			return dtos;
+		
+		entities.forEach(x -> dtos.add(toResponse(x)));
+		
+		return dtos;
+		
+		
+	}
+	
+
+	
 	
 }

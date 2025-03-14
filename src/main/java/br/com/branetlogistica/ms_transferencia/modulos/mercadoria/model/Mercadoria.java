@@ -38,6 +38,9 @@ public class Mercadoria implements IEntity  {
 	@Column(name="nome", columnDefinition="text")
 	private String nome;
 	
+	@Column(name="codigoCliente", length = 1024)
+	private String codigoCliente;
+	
 	@Column(name="registro_anvisa")
 	private String registroAnvisa;
 	

@@ -20,11 +20,8 @@ import lombok.Setter;
 public class MercadoriaResponse {
 
 	private Long id;
-	private String version;
-	
 	private String nome;
-	private String numeroCATMAT;
-	
-	
+	private String codigoCliente;
+		
 	
 }

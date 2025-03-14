@@ -42,6 +42,10 @@ public class RequisicaoTransferenciaService {
 		return mapper.toResponse(this.findById(id));
 	}
 	
+	public boolean existsById(Long id) {
+		return repository.existsById(id);
+	}
+	
 	public RequisicaoTransferencia findById(Long id) {
 		Optional<RequisicaoTransferencia> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new NotFoundException("Não foi encontrado requisição com o id = "+id));
@@ -54,12 +58,16 @@ public class RequisicaoTransferenciaService {
 			throw new ApiException(HttpStatus.BAD_REQUEST, 
 					"Erro de validação",
 					Arrays.asList(
-							new FieldErrorDto("centroCustoOrigemId",
-									"o centro de custo origem não pode ser o mesmo de destino",
-									request.getCentroCustoOrigemId().toString()),
-							new FieldErrorDto("centroCustoDestinoId",
-									"o centro de custo destino não pode ser o mesmo de origem",
-									request.getCentroCustoOrigemId().toString())
+							FieldErrorDto.builder()
+							.field("centroCustoOrigemId")
+							.value(request.getCentroCustoOrigemId().toString())
+							.erros(Arrays.asList("o centro de custo origem não pode ser o mesmo de destino"))
+							.build(),
+							FieldErrorDto.builder()
+							.field("centroCustoDestinoId")
+							.value(request.getCentroCustoDestinoId().toString())
+							.erros(Arrays.asList("o centro de custo destino não pode ser o mesmo de origem"))
+							.build()
 							));
 		
 		

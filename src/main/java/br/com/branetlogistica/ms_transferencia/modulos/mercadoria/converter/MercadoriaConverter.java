@@ -37,8 +37,7 @@ public class MercadoriaConverter {
 		return MercadoriaResponse.builder()
 				.id(entidade.getId())				
 				.nome(entidade.getNome())				
-				.numeroCATMAT(entidade.getNumeroCATMAT())
-				.version(entidade.getVersion().toString())
+				.codigoCliente(entidade.getCodigoCliente())
 				.build();
 	}
 	

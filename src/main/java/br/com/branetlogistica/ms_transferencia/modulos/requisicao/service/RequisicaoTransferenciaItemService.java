@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
 import br.com.branetlogistica.ms_transferencia.modulos.mercadoria.service.MercadoriaService;
-import br.com.branetlogistica.ms_transferencia.modulos.pessoajuridica.model.PessoaJuridica;
 import br.com.branetlogistica.ms_transferencia.modulos.pessoajuridica.service.PessoaJuridicaService;
 import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.request.RequisicaoTransferenciaItemCadastroRequest;
 import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.response.RequisicaoTransferenciaItemResponse;
@@ -41,6 +40,9 @@ public class RequisicaoTransferenciaItemService {
 		entity.setLote(request.getLote());
 		entity.setQuantidade(request.getQuantidade());
 		entity.setQuantidadeRecebida(0);
+	
+		if(request.getFabricanteId()!=null)
+			entity.setFabricante(pessoaJuridicaService.selecionarPorId(request.getFabricanteId()));
 		
 		entity = repository.save(entity);
 		return mapper.toResponse(entity);

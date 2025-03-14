@@ -7,7 +7,6 @@ import br.com.branetlogistica.ms_transferencia.modulos.mercadoria.dto.Mercadoria
 import br.com.branetlogistica.ms_transferencia.modulos.pessoajuridica.dto.PessoaJuridicaResponse;
 import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.IRequisicaoTransferenciaItemDTO;
 import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.model.DadosCadastro;
-import br.com.branetlogistica.ms_transferencia.modulos.requisicao.dto.model.RequisicaoTransferenciaDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,10 +23,7 @@ public class RequisicaoTransferenciaItemResponse implements IRequisicaoTransfere
 	private String validade;	
 	private Integer quantidade;
 	private Integer quantidadeRecebida;
-	
-	
-	private RequisicaoTransferenciaDTO requisicaoTransferencia;
-	
+		
 	private MercadoriaResponse mercadoria;
 	private PessoaJuridicaResponse fabricante;
 	
